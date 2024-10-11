@@ -105,8 +105,12 @@ net_device_table_mgr::net_device_table_mgr()
         int num_devices = 0;
         struct ibv_device **dev_list = nullptr;
         dev_list = xlio_ibv_get_device_list(&num_devices);
-        if (dev_list && num_devices == 0) {
+
+        if (dev_list) {
             ibv_free_device_list(dev_list);
+        }
+
+        if (dev_list && num_devices == 0) {
             ndtm_logdbg("net_device_map is empty %d", num_devices);
             free_ndtm_resources();
             throw_xlio_exception("net_device_map is empty");
