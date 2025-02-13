@@ -545,7 +545,7 @@ err_t sockinfo_tcp::rx_lwip_cb_xlio_socket(void *arg, struct tcp_pcb *pcb, struc
 
     tcp_recved(pcb, p->tot_len);
 
-    if (conn->m_p_group->m_socket_rx_cb) {
+    if (conn->m_p_group && conn->m_p_group->m_socket_rx_cb) {
         struct pbuf *ptmp = p;
 
         if (unlikely(conn->m_p_socket_stats)) {
